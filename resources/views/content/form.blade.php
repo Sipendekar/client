@@ -19,7 +19,8 @@
 <section class="pt-3 pb-4" id="count-stats">
     <div class="container">
     
-    <form action="">
+    <form action="{{route('form.store')}}" method="post" enctype="multipart/form-data">
+        @csrf
         <div class="row py-5">
             <div class="col-lg-10 mx-auto text-center">
                 <h3>Silahkan Isi lokasi dari lubang yang ada di Jalan</h3>
@@ -29,40 +30,38 @@
             <div class="col-lg-10 mx-auto">
                 <div class="input-group input-group-outline mb-4">
                     <label class="form-label">Nama Pelapor</label>
-                    <input class="form-control" type="text">
+                    <input class="form-control" name="name" type="text">
                 </div>
             </div>
         </div>
         <div class="row py-2">
             <div class="col-lg-10 mx-auto">
                 <label>Provinsi</label>
-                <select class="form-select" name="" id="">
-                    <option value="Halo">Halo</option>
+                <select class="form-select" name="province_code" id="province">
+                    <option value="">Pilih Provinsi</option>
+                    
+                    @foreach($provinces as $province)
+                        <option value="{{ $province->code }}">{{ $province->name }}</option>
+                    @endforeach
+
                 </select>
             </div>
         </div>
         <div class="row py-2">
             <div class="col-lg-10 mx-auto">
                 <label>Kota/Kabupaten</label>
-                <select class="form-select" name="" id="">
-                    <option value="Halo">Halo</option>
+                <select class="form-select" name="city_id" id="city">
+                    <option value="">-</option>
                 </select>
             </div>
         </div>
-        <div class="row py-2">
-            <div class="col-lg-10 mx-auto">
-                <label>Desa</label>
-                <select class="form-select" name="" id="">
-                    <option value="Halo">Halo</option>
-                </select>
-            </div>
-        </div>
+        
 
         <div class="row py-2">
             <div class="col-lg-10 mx-auto">
                 <div class="input-group mb-4 input-group-static">
                     <label>Alamat Lengkap</label>
-                    <textarea name="message" class="form-control" id="message" rows="1"></textarea>
+                    <textarea name="address" class="form-control" id="message" rows="1"></textarea>
                 </div>
             </div>
         </div>
@@ -70,7 +69,7 @@
         <div class="row py-2">
             <div class="col-lg-10 mx-auto">
                 <div class="input-group input-group-outline mb-4">
-                    <input class="form-control" type="file" id="imageInput">
+                    <input class="form-control" name="image" type="file" id="imageInput">
                 </div>
             </div>
         </div>
@@ -83,7 +82,7 @@
         
         <div class="row py-2">
             <div class="col-lg-10 mx-auto text-center">
-                <button type="button" class="btn bg-gradient-success w-50 me-2">Input Data Gambar</button>
+                <input type="submit" class="btn bg-gradient-success w-50 me-2" value="Simpan"></input>
             </div>
         </div>
     </form>
@@ -91,7 +90,8 @@
 </section>
 </div>
 
-{{-- <script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
 
 // Laravolt
 province.addEventListener('change', function () {
@@ -117,7 +117,7 @@ province.addEventListener('change', function () {
         })
     }
 });
-</script> --}}
+</script>
 <script>
         document.getElementById('imageInput').addEventListener('change', function(event) {
             const file = event.target.files[0]; // Ambil file yang dipilih

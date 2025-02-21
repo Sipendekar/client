@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,4 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/','content.form');
+Route::get('/', [FormController::class, 'create'])->name('form');
+Route::post('/', [FormController::class, 'store'])->name('form.store');
+Route::get('/get-cities/{province_code}', [App\Http\Controllers\RegionController::class, 'getCities'])->name('cities');
