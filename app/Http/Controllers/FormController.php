@@ -12,6 +12,21 @@ class FormController extends Controller
 {
     public function index()
     {
+        $form = Form::select(
+                'tbl_form.*',
+                'indonesia_provinces.name as province_name',
+                'indonesia_cities.name as city_name'
+            )
+            ->leftJoin('indonesia_provinces', 'tbl_form.province_code', '=', 'indonesia_provinces.code')
+            ->leftJoin('indonesia_cities', 'tbl_form.city_id', '=', 'indonesia_cities.id')
+            ->get();
+        
+        $hasForm = $form->isNotEmpty();
+
+        return view('content.report',compact('form','hasForm'));
+    }
+    public function create()
+    {
         $provinces = \Indonesia::allProvinces();
         $prediction = session('prediction', [
             'damage' => '',
@@ -71,7 +86,7 @@ class FormController extends Controller
 
         return redirect()->route('form')->with([
             'prediction' => $prediction,
-            'success' => 'Data Berhasil Dibuat.'
+            'success' => 'Data Berhasil.'
         ]);
     }
 }

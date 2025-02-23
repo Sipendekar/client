@@ -19,10 +19,12 @@
 }
 
 #preview {
-            width: 200px; 
-            height: auto;
-            display: none; 
+            width: 400px; 
+            height: 250px;
+            display: block; 
             margin-top: 10px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
 </style>

@@ -14,32 +14,16 @@
     <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
       <ul class="navbar-nav navbar-nav-hover ms-auto">
         <li class="nav-item dropdown dropdown-hover mx-2">
-          <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" href="" aria-expanded="false">
+          <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" href="{{route('form.create')}}" aria-expanded="false">
             <i class="material-icons opacity-6 me-2 text-md">dashboard</i>
-            Form Input
+            Form Tambah Data
           </a>
         </li>
         <li class="nav-item dropdown dropdown-hover mx-2">
-          <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" href="{{route('form')}}" aria-expanded="false">
             <i class="material-icons opacity-6 me-2 text-md">article</i>
             Laporan
-            <img src="./assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
           </a>
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-animation dropdown-md dropdown-md-responsive mt-0 mt-lg-3 p-3 border-radius-lg" aria-labelledby="dropdownMenuDocs">
-            <div class="d-none d-lg-block">
-  <ul class="list-group">
-    <li class="nav-item list-group-item border-0 p-0">
-      <a class="dropdown-item py-2 ps-3 border-radius-md" href="">
-        <h6 class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">XXXX</h6>
-        <span class="text-sm">XXXX</span>
-      </a>
-    </li>
-  </ul>
-</div>
-
-
-
-          </ul>
         </li>
       </ul>
     </div>

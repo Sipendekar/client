@@ -22,7 +22,7 @@
                 <!-- Input Form -->
                 <div class="row py-5">
                     <div class="col-lg-10 mx-auto text-center">
-                        <h3>Silahkan Isi Lokasi Kerusakan Jalan</h3>
+                        <h3>Silahkan Isi Form Kerusakan Jalan</h3>
                     </div>
                 </div>
                 <!-- Nama Pelapor -->
@@ -34,6 +34,13 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row py-2 text-center">
+                    <div class="col-lg-10 mx-auto">
+                        <h4>Data Kerusakan Jalan</h4>
+                    </div>
+                </div>
+
                 <!-- Provinsi -->
                 <div class="row py-2">
                     <div class="col-lg-10 mx-auto">
@@ -84,36 +91,6 @@
                     </div>
                 </div>
                 <!-- Card Hasil Prediksi -->
-                @if(session('prediction'))
-                <div class="card mt-4">
-                    <div class="card-header bg-primary text-white">
-                        Hasil Prediksi Kerusakan Jalan
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Jenis Kerusakan: {{ session('prediction')['damage'] }}</h5>
-                        <p class="card-text">
-                            <strong>Ukuran:</strong>
-                            @if(is_array(session('prediction')['size']))
-                                @if(in_array(session('prediction')['damage'], ['lubang jalan', 'area perbaikan']))
-                                    Diameter: {{ session('prediction')['size'] }} cm
-                                @else
-                                    Panjang: {{ session('prediction')['size'][0] }} cm, Lebar: {{ session('prediction')['size'][1] }} cm
-                                @endif
-                            @else
-                                {{ session('prediction')['size'] }}
-                            @endif
-                        </p>
-                        <p class="card-text"><strong>Estimasi Waktu Perbaikan:</strong> {{ session('prediction')['repair_time'] }} Menit</p>
-                        <p class="card-text"><strong>Bahan Perbaikan:</strong> {{ session('prediction')['material'] }}</p>
-                        <p class="card-text"><strong>Estimasi Jumlah Bahan:</strong> {{ session('prediction')['quantity'] }} {{ session('prediction')['quantity_unit'] }}</p>
-                        @if(session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                        @endif
-                    </div>
-                </div>
-                @endif
             </form>
         </div>
     </section>
@@ -153,6 +130,79 @@
                 }
             });
         }
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelector("form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let name = document.querySelector("input[name='name']").value.trim();
+            let province = document.querySelector("select[name='province_code']").value.trim();
+            let city = document.querySelector("select[name='city_id']").value.trim();
+            let address = document.querySelector("textarea[name='address']").value.trim();
+            let image = document.querySelector("input[name='image']").files.length;
+
+            if (!name || !province || !city || !address || image === 0) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Harap isi semua field dan upload gambar!",
+                });
+                return;
+            }
+
+            Swal.fire({
+                title: "Apakah data sudah benar?",
+                text: "Pastikan data yang diisi sudah benar sebelum dikirim.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#66BB6A",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, kirim!",
+                cancelButtonText: "Batal"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Mengirim data...",
+                        text: "Mohon tunggu sebentar",
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
+                    let formData = new FormData(event.target);
+                    fetch(event.target.action, {
+                        method: "POST",
+                        body: formData,
+                        headers: {
+                            "X-CSRF-TOKEN": document.querySelector("input[name=_token]").value
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Berhasil!",
+                            text: "Data berhasil dikirim.",
+                            confirmButtonText: "OK"
+                        }).then(() => {
+                            window.location.reload();
+                        });
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        Swal.fire({
+                            icon: "error",
+                            title: "Gagal!",
+                            text: "Terjadi kesalahan saat mengirim data.",
+                        });
+                    });
+                }
+            });
+        });
     });
 </script>
 @endsection
