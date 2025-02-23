@@ -15,14 +15,20 @@
       <ul class="navbar-nav navbar-nav-hover ms-auto">
         <li class="nav-item dropdown dropdown-hover mx-2">
           <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" href="{{route('form.create')}}" aria-expanded="false">
-            <i class="material-icons opacity-6 me-2 text-md">dashboard</i>
+            <i class="material-icons opacity-6 me-2 text-md">edit_note</i>
             Form Tambah Data
           </a>
         </li>
         <li class="nav-item dropdown dropdown-hover mx-2">
           <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" href="{{route('form')}}" aria-expanded="false">
             <i class="material-icons opacity-6 me-2 text-md">article</i>
-            Laporan
+            Laporan Dinas Terkait
+          </a>
+        </li>
+        <li class="nav-item dropdown dropdown-hover mx-2">
+          <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" href="{{route('form.index2')}}" aria-expanded="false">
+            <i class="material-icons opacity-6 me-2 text-md">warning</i>
+            Pemberitahuan Pengendara
           </a>
         </li>
       </ul>

@@ -91,4 +91,21 @@ class FormController extends Controller
         ]);
 
     }
+
+    public function index2()
+    {
+        $form = Form::select(
+                'tbl_form.*',
+                'indonesia_provinces.name as province_name',
+                'indonesia_cities.name as city_name'
+            )
+            ->leftJoin('indonesia_provinces', 'tbl_form.province_code', '=', 'indonesia_provinces.code')
+            ->leftJoin('indonesia_cities', 'tbl_form.city_id', '=', 'indonesia_cities.id')
+            ->get();
+        
+        $hasForm = $form->isNotEmpty();
+
+        return view('content.user',compact('form','hasForm'));
+    }
+
 }
