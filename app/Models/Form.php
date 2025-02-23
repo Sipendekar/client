@@ -11,7 +11,7 @@ class Form extends Model
 
     public $table = "tbl_form";
 
-    protected $primarykey = 'id';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'name',
@@ -20,4 +20,9 @@ class Form extends Model
         'address',
         'image',
     ];
+
+    public function prediction()
+    {
+        return $this->hasOne(Prediction::class);
+    }
 }
