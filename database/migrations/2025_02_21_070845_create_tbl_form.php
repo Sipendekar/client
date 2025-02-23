@@ -18,6 +18,12 @@ return new class extends Migration
             $table->string('city_id');
             $table->text('address');
             $table->text('image');
+            $table->string('damage_type');
+            $table->json('size')->comment('Stored as JSON to handle both diameter and length/width measurements');
+            $table->float('repair_time')->comment('Estimated repair time in minutes');
+            $table->string('material')->comment('Type of repair material needed');
+            $table->float('quantity')->comment('Amount of material needed');
+            $table->string('quantity_unit')->comment('Unit of measurement for quantity (kg, L, etc)');
             $table->timestamps();
         });
     }

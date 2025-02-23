@@ -19,10 +19,11 @@ class Form extends Model
         'city_id',
         'address',
         'image',
+        'damage_type',
+        'size',
+        'repair_time',
+        'material',
+        'quantity',
+        'quantity_unit'
     ];
-
-    public function prediction()
-    {
-        return $this->hasOne(Prediction::class);
-    }
 }
