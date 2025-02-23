@@ -37,6 +37,9 @@
                         <div class="row">
                             <h5>Alamat detail : {{$data->address}}</h5>
                         </div>
+                        <div class="row">
+                            <h5>Detail Kerusakan : {{$data->damage_type}}</h5>
+                        </div>
                     </div>
                 </div>
             @endforeach
