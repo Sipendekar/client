@@ -21,8 +21,9 @@
                 <h1>List Lokasi Kerusakan Jalan</h1>
             </div>
             
-            <div class="card card-body mx-3 mx-md-4" style="border: 1px solid black;">
-            @if ($hasForm)    
+            
+            @if ($hasForm)   
+            <div class="card card-body mx-3 mx-md-4 mt-5 mb-5" style="border: 1px solid black;">
                 @foreach ($form as $data)
                 <div class="row">
                     <div class="col-lg-4 col-sm-12 col-md-12 mb-3">
@@ -66,13 +67,15 @@
                     </div>
                 </div>
             @endforeach
+            </div>
             @else
+            <div class="card card-body mx-3 mx-md-4" style="border: 1px solid black;">
                 <center>
                     <h2>Maaf, Tidak ada Laporan</h2>
                     <h2>Silahkan Tambah Laporan Jika Ada</h2>
                 </center>
-            @endif
             </div>
+            @endif
         </div>
     </section>
 </div>
