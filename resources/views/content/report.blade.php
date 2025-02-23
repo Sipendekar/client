@@ -48,7 +48,11 @@
                             <p>Tipe Kerusakan : {{$data->damage_type}}</p>
                         </div>
                         <div class="row">
-                            <p>Ukuran Kerusakan : {{number_format(json_decode($data->size)->value, 1)}}CM</p>
+                            @php
+                                $size = json_decode($data->size, true); // Decode sebagai array
+                            @endphp
+
+                            <p>Ukuran Kerusakan : {{ is_array($size) ? number_format($size[0], 1) . ' x ' . number_format($size[1], 1) : number_format($data->size, 1) }} CM</p>
                         </div>
                         <div class="row">
                             <p>Waktu Perbaikan : {{number_format($data->repair_time,1)}} Menit</p>

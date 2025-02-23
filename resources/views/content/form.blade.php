@@ -174,6 +174,7 @@
                     });
 
                     let formData = new FormData(event.target);
+                    console.log([...formData]); 
                     fetch(event.target.action, {
                         method: "POST",
                         body: formData,

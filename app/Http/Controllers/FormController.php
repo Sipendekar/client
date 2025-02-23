@@ -84,16 +84,10 @@ class FormController extends Controller
             'quantity_unit' => $prediction['quantity_unit']
         ]);
 
-        if (request()->ajax()) {
-            return response()->json([
-                'prediction' => $prediction,
-                'success' => 'Data Berhasil.'
-            ], 200);
-        }
-
-        return redirect()->route('form')->with([
-            'prediction' => $prediction,
-            'success' => 'Data Berhasil.'
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil disimpan!',
+            'data' => $form
         ]);
 
     }
